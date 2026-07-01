@@ -1,0 +1,146 @@
+.contact-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  color: var(--mat-sys-primary) !important;
+  font: var(--mat-sys-label-large);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.contact-header h2 {
+  margin: 0;
+  font: var(--mat-sys-display-medium);
+  letter-spacing: -0.035em;
+}
+
+.contact-header p {
+  max-width: 40rem;
+  color: var(--mat-sys-on-surface-variant);
+  font: var(--mat-sys-body-large);
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(16rem, 0.5fr);
+  gap: 1rem;
+}
+
+mat-card-content {
+  padding-top: 1.5rem;
+}
+
+form {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.form-footer span {
+  color: var(--mat-sys-on-surface-variant);
+  font: var(--mat-sys-body-small);
+}
+
+.form-footer button {
+  min-width: 11rem;
+}
+
+.form-footer mat-spinner {
+  margin: 0 auto;
+}
+
+.submission-message {
+  margin: 1rem 0 0;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: var(--mat-sys-primary-container);
+  color: var(--mat-sys-on-primary-container);
+}
+
+.submission-message.error {
+  background: var(--mat-sys-error-container);
+  color: var(--mat-sys-on-error-container);
+}
+
+aside {
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+}
+
+aside section {
+  display: flex;
+  gap: 1rem;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  background: var(--mat-sys-surface-container);
+}
+
+aside section > span {
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--mat-sys-secondary-container);
+  color: var(--mat-sys-on-secondary-container);
+  font-weight: 700;
+}
+
+aside h3,
+aside p {
+  margin: 0;
+}
+
+aside p {
+  margin-top: 0.35rem;
+  color: var(--mat-sys-on-surface-variant);
+  line-height: 1.5;
+}
+
+@media (max-width: 850px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .contact-header,
+  .form-footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .contact-header h2 {
+    font: var(--mat-sys-display-small);
+  }
+
+  .field-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}

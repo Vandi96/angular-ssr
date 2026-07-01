@@ -1,0 +1,51 @@
+<section class="page-heading">
+  <div>
+    <p class="eyebrow">Rendering laboratory</p>
+    <h2>Products</h2>
+    <p>The UI and data are identical; only the rendering strategy changes.</p>
+  </div>
+  <mat-chip-set aria-label="Rendering mode">
+    <mat-chip highlighted>{{ renderMode }}</mat-chip>
+  </mat-chip-set>
+</section>
+
+@if (response(); as result) {
+  <aside class="request-details" aria-label="Request details">
+    <span><strong>Data source:</strong> {{ result.source }}</span>
+    <span><strong>Generated:</strong> {{ result.generatedAt | date: 'mediumTime' }}</span>
+  </aside>
+
+  <div class="product-grid">
+    @for (product of result.products; track product.id) {
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <div class="product-icon" mat-card-avatar aria-hidden="true">
+            {{ product.name.charAt(0) }}
+          </div>
+          <mat-card-title>{{ product.name }}</mat-card-title>
+          <mat-card-subtitle>{{ product.category }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ product.description }}</p>
+        </mat-card-content>
+        <mat-card-footer>
+          <strong>{{ product.price | currency: 'EUR' }}</strong>
+          <a mat-button [routerLink]="detailPath(product.id)">View details</a>
+        </mat-card-footer>
+      </mat-card>
+    }
+  </div>
+} @else if (error()) {
+  <div class="state-message error" role="alert">
+    <h3>The products could not be loaded.</h3>
+    <p>Check whether the Express server is available, then reload the page.</p>
+  </div>
+} @else {
+  <div class="state-message" aria-live="polite">
+    <mat-spinner diameter="42" />
+    <div>
+      <h3>Loading products…</h3>
+      <p>The artificial delay makes the rendering behavior easier to observe.</p>
+    </div>
+  </div>
+}

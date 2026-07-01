@@ -1,0 +1,31 @@
+<a mat-button [routerLink]="productsPath">← Back to products</a>
+
+@if (loading()) {
+  <div class="state-message" aria-live="polite">
+    <mat-spinner diameter="42" />
+    <p>Loading product…</p>
+  </div>
+} @else if (product(); as item) {
+  <mat-card appearance="outlined">
+    <div class="product-visual" aria-hidden="true">{{ item.name.charAt(0) }}</div>
+    <div class="product-content">
+      <mat-chip-set aria-label="Product metadata">
+        <mat-chip>{{ renderMode }}</mat-chip>
+        <mat-chip>{{ item.category }}</mat-chip>
+      </mat-chip-set>
+      <h2>{{ item.name }}</h2>
+      <p>{{ item.description }}</p>
+      <strong>{{ item.price | currency: 'EUR' }}</strong>
+    </div>
+  </mat-card>
+} @else if (failed()) {
+  <div class="state-message error" role="alert">
+    <h2>Something went wrong</h2>
+    <p>The product service is currently unavailable.</p>
+  </div>
+} @else {
+  <div class="state-message" role="status">
+    <h2>Product not found</h2>
+    <p>There is no product with this identifier.</p>
+  </div>
+}

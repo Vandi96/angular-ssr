@@ -1,0 +1,42 @@
+<header class="blog-header">
+  <div>
+    <p class="eyebrow">Orbit Journal · Issue 04</p>
+    <h2>Notes on useful things<br />and unnecessary experiments.</h2>
+  </div>
+  <mat-chip-set aria-label="Page rendering mode">
+    <mat-chip highlighted>Prerendered</mat-chip>
+  </mat-chip-set>
+</header>
+
+<article class="featured-post">
+  <div class="featured-art" aria-hidden="true">
+    <span>✦</span>
+    <strong>04</strong>
+  </div>
+  <div class="featured-copy">
+    <p class="post-meta">Featured essay · 8 min read</p>
+    <h3>A small catalogue of things worth loading instantly</h3>
+    <p>
+      Sunlight, good headlines, the first cup of coffee—and occasionally an Angular page whose
+      HTML existed before anyone asked for it.
+    </p>
+    <span class="text-link">Read the field note →</span>
+  </div>
+</article>
+
+<section class="post-grid" aria-label="Latest articles">
+  @for (post of posts; track post.number) {
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <div class="post-number" mat-card-avatar>{{ post.number }}</div>
+        <mat-card-title>{{ post.category }}</mat-card-title>
+        <mat-card-subtitle>{{ post.date }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.excerpt }}</p>
+      </mat-card-content>
+      <mat-card-footer>{{ post.readTime }}</mat-card-footer>
+    </mat-card>
+  }
+</section>

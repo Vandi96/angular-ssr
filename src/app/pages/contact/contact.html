@@ -1,0 +1,107 @@
+<header class="contact-header">
+  <div>
+    <p class="eyebrow">Ground control</p>
+    <h2>Send a message<br />into orbit.</h2>
+    <p>Questions, observations and strongly held opinions about mugs are all welcome.</p>
+  </div>
+  <mat-chip-set aria-label="Page rendering mode">
+    <mat-chip highlighted>Prerendered + hydrated</mat-chip>
+  </mat-chip-set>
+</header>
+
+<div class="contact-layout">
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>Compose transmission</mat-card-title>
+      <mat-card-subtitle>The form becomes interactive after hydration</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <div class="field-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" autocomplete="name" />
+            @if (form.controls.name.touched && form.controls.name.invalid) {
+              <mat-error>Please enter at least two characters.</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" type="email" autocomplete="email" />
+            @if (form.controls.email.touched && form.controls.email.invalid) {
+              <mat-error>Please enter a valid email address.</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Topic</mat-label>
+          <mat-select formControlName="topic">
+            <mat-option value="products">Products and questionable merchandise</mat-option>
+            <mat-option value="rendering">Rendering and hydration</mat-option>
+            <mat-option value="other">Something entirely different</mat-option>
+          </mat-select>
+          @if (form.controls.topic.touched && form.controls.topic.invalid) {
+            <mat-error>Please select a topic.</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Message</mat-label>
+          <textarea matInput formControlName="message" rows="6"></textarea>
+          <mat-hint>At least 10 characters</mat-hint>
+          @if (form.controls.message.touched && form.controls.message.invalid) {
+            <mat-error>Tell us a little more.</mat-error>
+          }
+        </mat-form-field>
+
+        <div class="form-footer">
+          <span>Your message is handled by the local Express API.</span>
+          <button mat-flat-button type="submit" [disabled]="submitting()">
+            @if (submitting()) {
+              <mat-spinner diameter="20" />
+            } @else {
+              Send transmission
+            }
+          </button>
+        </div>
+
+        @if (submissionState() !== 'idle') {
+          <p
+            class="submission-message"
+            [class.error]="submissionState() === 'error'"
+            role="status"
+          >
+            {{ responseMessage() }}
+          </p>
+        }
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <aside>
+    <section>
+      <span>01</span>
+      <div>
+        <h3>Build time</h3>
+        <p>The complete empty form is generated as static HTML.</p>
+      </div>
+    </section>
+    <section>
+      <span>02</span>
+      <div>
+        <h3>Hydration</h3>
+        <p>Angular attaches validation and submission behavior in the browser.</p>
+      </div>
+    </section>
+    <section>
+      <span>03</span>
+      <div>
+        <h3>Interaction</h3>
+        <p>The browser posts valid form data to the Express endpoint.</p>
+      </div>
+    </section>
+  </aside>
+</div>

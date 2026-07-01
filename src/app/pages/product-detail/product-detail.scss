@@ -1,0 +1,76 @@
+:host {
+  display: block;
+}
+
+:host > a {
+  margin-bottom: 1.5rem;
+}
+
+mat-card {
+  display: grid;
+  grid-template-columns: minmax(14rem, 0.8fr) minmax(18rem, 1.2fr);
+  overflow: hidden;
+}
+
+.product-visual {
+  display: grid;
+  min-height: 24rem;
+  place-items: center;
+  background: linear-gradient(135deg, var(--mat-sys-primary-container), var(--mat-sys-tertiary-container));
+  color: var(--mat-sys-on-primary-container);
+  font-size: clamp(6rem, 15vw, 12rem);
+  font-weight: 700;
+}
+
+.product-content {
+  align-self: center;
+  padding: clamp(2rem, 6vw, 5rem);
+}
+
+.product-content h2 {
+  margin: 1.5rem 0 0.75rem;
+  font: var(--mat-sys-display-medium);
+}
+
+.product-content p {
+  color: var(--mat-sys-on-surface-variant);
+  font: var(--mat-sys-body-large);
+  line-height: 1.7;
+}
+
+.product-content strong {
+  display: block;
+  margin-top: 2rem;
+  color: var(--mat-sys-primary);
+  font: var(--mat-sys-headline-medium);
+}
+
+.state-message {
+  display: grid;
+  min-height: 18rem;
+  place-items: center;
+  align-content: center;
+  gap: 1rem;
+  border: 1px dashed var(--mat-sys-outline);
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.state-message h2,
+.state-message p {
+  margin: 0;
+}
+
+.state-message.error {
+  color: var(--mat-sys-error);
+}
+
+@media (max-width: 700px) {
+  mat-card {
+    grid-template-columns: 1fr;
+  }
+
+  .product-visual {
+    min-height: 14rem;
+  }
+}

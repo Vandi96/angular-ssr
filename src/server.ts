@@ -6,23 +6,49 @@ import {
 } from '@angular/ssr/node';
 import express from 'express';
 import { join } from 'node:path';
+import { createProductResponse, getProductById } from './app/products/product.repository';
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
 const app = express();
 const angularApp = new AngularNodeAppEngine();
 
-/**
- * Example Express Rest API endpoints can be defined here.
- * Uncomment and define endpoints as necessary.
- *
- * Example:
- * ```ts
- * app.get('/api/{*splat}', (req, res) => {
- *   // Handle API request
- * });
- * ```
- */
+app.use(express.json());
+
+app.get('/api/products', (_req, res) => {
+  setTimeout(() => {
+    res.json(createProductResponse('Express API'));
+  }, 900);
+});
+
+app.get('/api/products/:id', (req, res) => {
+  setTimeout(() => {
+    const product = getProductById(Number(req.params['id']));
+
+    if (!product) {
+      res.status(404).json({ message: 'Product not found' });
+      return;
+    }
+
+    res.json(product);
+  }, 500);
+});
+
+app.post('/api/contact', (req, res) => {
+  const body = req.body as Partial<{ email: string; message: string; name: string; topic: string }>;
+
+  if (!body.name || !body.email || !body.message || !body.topic) {
+    res.status(400).json({ message: 'Every field is required.' });
+    return;
+  }
+
+  setTimeout(() => {
+    res.status(201).json({
+      message: `Thanks, ${body.name}! Your message has entered orbit.`,
+      receivedAt: new Date().toISOString(),
+    });
+  }, 700);
+});
 
 /**
  * Serve static files from /browser

@@ -1,0 +1,68 @@
+<section class="hero">
+  <div class="hero-copy">
+    <mat-chip-set aria-label="Page rendering mode">
+      <mat-chip highlighted>Prerendered</mat-chip>
+      <mat-chip>Ready before you arrive</mat-chip>
+    </mat-chip-set>
+
+    <p class="eyebrow">Orbit Market · Summer 2026</p>
+    <h2>Small objects.<br />Unreasonably big energy.</h2>
+    <p class="intro">
+      A tiny storefront for hydration gear, server-rendered hoodies and mugs that were ready
+      before the coffee machine woke up.
+    </p>
+
+    <div class="hero-actions">
+      <a mat-flat-button routerLink="/products-prerender">Explore the collection</a>
+      <a mat-button routerLink="/dashboard">Open the dashboard</a>
+    </div>
+  </div>
+
+  <div class="hero-art" aria-hidden="true">
+    <div class="orbit orbit-large"></div>
+    <div class="orbit orbit-small"></div>
+    <div class="planet">A</div>
+    <span class="spark spark-one">✦</span>
+    <span class="spark spark-two">✦</span>
+  </div>
+</section>
+
+<section class="feature-grid" aria-label="Featured collections">
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <div class="feature-number" mat-card-avatar>01</div>
+      <mat-card-title>Fast by default</mat-card-title>
+      <mat-card-subtitle>The page arrived dressed already</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>No spinner, no dramatic entrance. Just content waiting patiently in the HTML.</p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <div class="feature-number" mat-card-avatar>02</div>
+      <mat-card-title>Oddly practical</mat-card-title>
+      <mat-card-subtitle>Four products, several opinions</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Compare the same collection through client, server and build-time rendering.</p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <div class="feature-number" mat-card-avatar>03</div>
+      <mat-card-title>Browser aware</mat-card-title>
+      <mat-card-subtitle>Enhanced when JavaScript arrives</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>The server handles the opening act; hydration takes care of the interactive encore.</p>
+    </mat-card-content>
+  </mat-card>
+</section>
+
+<section class="quote-block">
+  <p>“Prebuilt at compile time, emotionally assembled at runtime.”</p>
+  <span>— definitely a real product philosophy</span>
+</section>
