@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, inject, signal } from '@angular/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -28,6 +29,7 @@ type SubmissionState = 'error' | 'idle' | 'success';
   styleUrl: './contact.scss',
 })
 export class Contact {
+  private readonly destroyRef = inject(DestroyRef);
   private readonly formBuilder = inject(FormBuilder);
   private readonly http = inject(HttpClient);
 
@@ -52,7 +54,10 @@ export class Contact {
     this.submitting.set(true);
     this.http
       .post<{ message: string }>('/api/contact', this.form.getRawValue())
-      .pipe(finalize(() => this.submitting.set(false)))
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        finalize(() => this.submitting.set(false)),
+      )
       .subscribe({
         next: (response) => {
           this.responseMessage.set(response.message);

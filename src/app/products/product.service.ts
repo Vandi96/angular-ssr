@@ -23,7 +23,7 @@ export class ProductService {
   private readonly request = inject(REQUEST, { optional: true });
   private readonly transferState = inject(TransferState);
 
-  getProducts(): Observable<ProductResponse> {
+  public getProducts(): Observable<ProductResponse> {
     if (isPlatformBrowser(this.platformId)) {
       const transferredProducts = this.transferState.get(PRODUCTS_STATE_KEY, null);
 
@@ -50,7 +50,7 @@ export class ProductService {
     });
   }
 
-  getProduct(id: number): Observable<Product | null> {
+  public getProduct(id: number): Observable<Product | null> {
     const stateKey = makeStateKey<Product | null>(`product-${id}`);
 
     if (isPlatformBrowser(this.platformId)) {

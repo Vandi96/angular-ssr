@@ -1,4 +1,4 @@
-<a mat-button [routerLink]="productsPath">← Back to products</a>
+<a mat-button [routerLink]="productsPath()">← Back to products</a>
 
 @if (loading()) {
   <div class="state-message" aria-live="polite">
@@ -10,7 +10,7 @@
     <div class="product-visual" aria-hidden="true">{{ item.name.charAt(0) }}</div>
     <div class="product-content">
       <mat-chip-set aria-label="Product metadata">
-        <mat-chip>{{ renderMode }}</mat-chip>
+        <mat-chip>{{ renderMode() }}</mat-chip>
         <mat-chip>{{ item.category }}</mat-chip>
       </mat-chip-set>
       <h2>{{ item.name }}</h2>

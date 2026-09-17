@@ -1,59 +1,34 @@
-# AngularSsrPoc
+# Angular SSR POC
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.4.
+Small Angular storefront that compares client rendering, server rendering, and prerendering with the same product data.
 
-## Development server
-
-To start a local development server, run:
+## Run locally
 
 ```bash
-ng serve
+npm install
+npm start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Open `http://localhost:4200/`. The Angular development server uses the Express handler in `src/server.ts` for the local API.
 
-## Code scaffolding
+## Rendering routes
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+| Route | Rendering | What to observe |
+| --- | --- | --- |
+| `/products-csr` | Client | Product data appears after the browser requests `/api/products`. |
+| `/products-ssr` | Server | Product data is included in the response HTML and transferred to the browser during hydration. |
+| `/products-prerender` | Prerender | Product data is generated at build time and included in static HTML. |
+| `/products-*/:id` | Same mode as its list route | Product details use the same rendering strategy. |
+| `/landing`, `/blog`, `/contact` | Prerender | Static page content is ready before JavaScript runs. |
+| `/dashboard` | Server | Browser-only values appear after hydration. |
+
+The product and detail services add short delays so the rendering differences are visible. The Express API returns the same four in-memory products. The contact endpoint acknowledges a submission but does not store or send it.
+
+## Production build
 
 ```bash
-ng generate component component-name
+npm run build
+npm run serve:ssr:angular-ssr-poc
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+The server listens on port `4000` by default. Set `PORT` to use another port. The build output is written to `dist/angular-ssr-poc/`.
